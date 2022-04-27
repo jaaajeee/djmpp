@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./edit-exercise";
-import EditActivities from "./edit-exercise";
+import EditModal from "./edit-modal";
 
 const RecordActivities = () => {
 
@@ -16,6 +16,11 @@ const RecordActivities = () => {
             setRecord(res.data);
         })();
     }, []);
+
+    //edit modal
+
+
+
 
 
     //sweet alert confirmation for delete button 
@@ -34,19 +39,11 @@ const RecordActivities = () => {
 
     // sweet alert modal for edit record and pull data from database
 
-    // const onEdit = (id) => {
-    //     window.confirm("Are you sure to edit?") && (async () => {
-    //         const client = axios.create({
-    //             baseURL: "http://localhost:8000",
-    //         })
-    //         await client.put(`user/me/record/${id}`);
-    //         const newRecord = record.filter(record => record._id !== id);
-    //         setRecord(newRecord);
-    //         console.log(newRecord);
-    //     })();
-    // }
+       
 
     return (
+        <>
+        {/* <EditModal /> */}
         <div className="container d-justify-content-center">
             <div className="row">
                 <div className="mt-5 col-md-12">
@@ -70,7 +67,7 @@ const RecordActivities = () => {
                                     <td>{items.date && items.date.slice(0, 10)}</td>
                                     <td>{items.duration}</td>
                                     <td>
-                                        <button id={index} className="btn btn-warning" >Edit</button>
+                                        {/* <button className="btn btn-warning" onClick={() => {EditModal ()}} >Edit</button> */}
                                         <button className="btn btn-danger"  onClick={() => {onDelete(items._id)}} >Delete</button>
                                     </td>
                                 </tr>
@@ -79,7 +76,8 @@ const RecordActivities = () => {
                     </table>
                 </div>
             </div>
-        </div>  
+        </div> 
+    </>
     )
 }
 

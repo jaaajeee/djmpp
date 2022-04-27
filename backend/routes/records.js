@@ -4,7 +4,6 @@ const RecordModel = require('../models/record.js');
 
 const router = express.Router();
 
-
 router.use('/:recordId', async (req, res, next) => {
     const recordId = req.params.recordId;
     if (recordId && !recordId.match(/^[0-9a-fA-F]{24}$/)) {
@@ -45,7 +44,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:recordId',async (req, res, next) => {
     const foundedId = req.params._id;
     const body = req.body;
-    await RecordModel.findByIdAndUpdate({_id:foundedId}, body,{runValidators: true})
+    await RecordModel.findByIdAndUpdate({id:foundedId}, body,{runValidators: true})
     .then(() => {
         res.status(201).send('Record updated');
     })

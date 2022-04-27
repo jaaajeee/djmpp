@@ -37,6 +37,7 @@ const AddActivities = () => {
         }
         const isSubmitting = true;
         setIsSubmitting(isSubmitting);
+        alert("Submitting");
     }
 
     useEffect(() => {
@@ -71,7 +72,6 @@ const AddActivities = () => {
                 type="text"
                 onChange={handleChange}
                 value={activity.activityName}
-                
                 >
                 <option >Select Activity</option>
                 <option >Running</option>
@@ -139,9 +139,6 @@ const AddActivities = () => {
             </Form.Text>
         </Form.Group>
         <Button variant="primary" type="submit" onClick={handleClick} >SAVE</Button>
-
-        
-
         </Form>
 
     );
