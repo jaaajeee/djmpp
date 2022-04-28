@@ -49,11 +49,9 @@ router.put('/:recordId',async (req, res, next) => {
         res.status(201).send('Record updated');
     })
     .catch(err => {
-        const errorsFieldsNames = Object.keys(err.errors);
-        if (errorsFieldsNames.length > 0) {
-            return res.status(400).send(err.errors[errorsFieldsNames[0]].message);
-        }
-    });
+        res.status(400).send(err);
+    }
+    );    
 });
   
 router.delete('/:recordId', async (req, res, next) => {

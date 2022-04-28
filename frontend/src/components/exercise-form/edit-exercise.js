@@ -11,41 +11,45 @@ const EditActivities = () => {
         duration: "",
     };
 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true)
+
     const [records, setRecords] = useState([]);
     const [update, setUpdate] = useState(initialUpdate);
     const [errors, setErrors] = useState({});
     const [isUpdating, setIsUpdating] = useState(false);
 
-    // const recordsList = records.map((record) => {
-    //     return (
-    //         <tr key={record.id}>
-    //             <td>{record.activityName}</td>
-    //             <td>{record.description}</td>
-    //             <td>{record.calories}</td>
-    //             <td>{record.date}</td>
-    //             <td>{record.duration}</td>
-    //             <td>
-    //                 <Button
-    //                     variant="primary"
-    //                     onClick={() => {
-    //                         setUpdate({
-    //                             activityName: record.activityName,
-    //                             description: record.description,
-    //                             calories: record.calories,
-    //                             date: record.date,
-    //                             duration: record.duration,
-    //                         });
-    //                         setIsUpdating(true);
-    //                     }
-    //                     }
-    //                 >
-    //                     Edit
-    //                 </Button>
-    //             </td>
-    //         </tr>
-    //     );
-    // }
-    // );
+    const recordsList = records.map((record) => {
+        return (
+            <tr key={record.id}>
+                <td>{record.activityName}</td>
+                <td>{record.description}</td>
+                <td>{record.calories}</td>
+                <td>{record.date}</td>
+                <td>{record.duration}</td>
+                <td>
+                    <Button
+                        variant="primary"
+                        onClick={() => {
+                            setUpdate({
+                                activityName: record.activityName,
+                                description: record.description,
+                                calories: record.calories,
+                                date: record.date,
+                                duration: record.duration,
+                            });
+                            setIsUpdating(true);
+                        }
+                        }
+                    >
+                        Edit
+                    </Button>
+                </td>
+            </tr>
+        );
+    }
+    );
     
 
     const handleChange = (event) => {
@@ -94,8 +98,11 @@ const EditActivities = () => {
     }, [isUpdating]);
 
     return () => {
-        <div>
-            <Modal>
+        <div> 
+            <Button variant="primary" onClick={handleShow}>
+                Edit
+            </Button>
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Activity</Modal.Title>
                 </Modal.Header>
@@ -184,6 +191,12 @@ const EditActivities = () => {
                             )}
                         </div>
                     </form>
+                    <Button variant="primary" onClick={handleClick}>
+                        Update
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Close
+                    </Button>
                 </Modal.Body>
             </Modal>
         </div>

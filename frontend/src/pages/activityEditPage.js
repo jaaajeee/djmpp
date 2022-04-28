@@ -1,7 +1,7 @@
-import EditActivities from '../components/exercise-form/edit-exercise.js';
+import UpdateRecords from "../components/exercise-form/update-record";
 
-export default function activityEditPage() {
+export default function ActivityEditPage() {
   return (
-    <EditActivities />
+    <UpdateRecords />
   )
 }

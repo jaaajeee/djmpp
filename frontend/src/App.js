@@ -7,8 +7,9 @@ import ActivityListPage from './pages/activityListPage';
 import Profile from './components/profile';
 import SigninPage from './pages/signinPage';
 import SignUpPage from './pages/SignUpPage';
-import activityEditPage from './pages/activityEditPage';
+import ActivityEditPage from './pages/activityEditPage';
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<SigninPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/create" exact element={<AddactivityPage />} />,
-          <Route path="/edit" element={<activityEditPage />} />,
+          <Route path="/edit" element={<ActivityEditPage />} />,
           <Route path="/record" element={<ActivityListPage />} />
         </Routes>
       </Router>

@@ -82,11 +82,8 @@ export const EditModal = (props) => {
             </div>
         </div>
     </div>
- 
-    
   )
 }
-
 
 
 export default EditModal;

@@ -2,7 +2,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const MySwal = withReactContent(Swal)
 
 const AddActivities = () => {
     const initialState = {
@@ -25,7 +28,7 @@ const AddActivities = () => {
         const isNull = Object.values(activity).some((item) => item === "");
         if (isNull) {
             setErrors({
-                activityName: "Activity name is required",
+                activityName: "Activity is required",
                 description: "Description is required",
                 calories: "Calories is required",
                 date: "Date is required",
@@ -35,9 +38,26 @@ const AddActivities = () => {
             setErrors({});
             setIsSubmitting(true);
         }
+
         const isSubmitting = true;
+        if (isSubmitting) {
+            Swal.fire({
+            title: 'Success',  
+            text: 'Activity added successfully',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 5000
+        })
+        }else{
+            Swal.fire({
+            title: 'Error',  
+            text: 'Please fill in all the fields',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 5000
+        })
+        }
         setIsSubmitting(isSubmitting);
-        alert("Submitting");
     }
 
     useEffect(() => {
@@ -49,13 +69,23 @@ const AddActivities = () => {
                 await client.post("me/record", activity)
                 .then(res => {
                     if(res.status === 200){
-                        alert("All Records added");
-                        setIsSubmitting(false);
+                        Swal.fire({
+                            title: 'Success',  
+                            text: 'Activity added successfully',
+                            showConfirmButton: false,
+                            icon: 'success',
+                        })
+                        setIsSubmitting(false)
                     }
                 })
-                .catch((err) => {
-                    alert("Please insert correct data");
-                    console.log(err);
+                .catch((setErrors) => {
+                    Swal.fire({
+                        title: 'Error',  
+                        text: 'Please fill in all the fields',
+                        showConfirmButton: false,
+                        icon: 'error',
+                    })
+                    setIsSubmitting(false)
                 })
             }
         })()
@@ -72,6 +102,7 @@ const AddActivities = () => {
                 type="text"
                 onChange={handleChange}
                 value={activity.activityName}
+                required
                 >
                 <option >Select Activity</option>
                 <option >Running</option>
@@ -91,6 +122,7 @@ const AddActivities = () => {
                 type="text"
                 onChange={handleChange}
                 value={activity.description}
+                required
                 />
             <Form.Text className="text-muted" >
                 {errors.description}
@@ -105,6 +137,7 @@ const AddActivities = () => {
                 type="number"
                 onChange={handleChange}
                 value={activity.calories}
+                required
                 />
             <Form.Text className="text-muted">
                 {errors.calories}
@@ -117,6 +150,7 @@ const AddActivities = () => {
                 id="date"
                 name="date"
                 type="date"
+                required
                 onChange={handleChange}
                 value={activity.date}
                 />
@@ -131,6 +165,7 @@ const AddActivities = () => {
                 id="duration"
                 name="duration"
                 type="number"
+                required
                 onChange={handleChange}
                 value={activity.duration}
                 />
