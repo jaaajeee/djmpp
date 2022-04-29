@@ -18,16 +18,20 @@ router.use('/:recordId', async (req, res, next) => {
     return next();
 });
 
-router.get('/:recordId', (req, res, next) => {
-    return res.send(req.record);
+// get all records
+router.get('/', async (req, res) => {
+    const records = await RecordModel.find();
+    return res.send(records);
 });
 
-router.get('/', async (req, res, next) => {
-    const response = await RecordModel.find();
-    return res.send(response);
+// get record by id 
+router.get('/:recordId', async (req, res) => {
+    const record = await RecordModel.findById(req.params.recordId);
+    return res.send(record);
 });
 
-router.post('/', async (req, res, next) => {
+// create new record
+router.post('/', async (req, res) => {
     const body = req.body;
     const newRecord = new RecordModel(body);
     const errors = newRecord.validateSync();
@@ -41,20 +45,28 @@ router.post('/', async (req, res, next) => {
     return res.status(201).send('newRecord created');
 });
 
+// update record
 router.put('/:recordId',async (req, res, next) => {
-    const foundedId = req.params._id;
     const body = req.body;
-    await RecordModel.findByIdAndUpdate({id:foundedId}, body,{runValidators: true})
-    .then(() => {
-        res.status(201).send('Record updated');
-    })
-    .catch(err => {
-        res.status(400).send(err);
+    const record = req.record;
+    const errors = record.validateSync();
+    if (errors) {
+        const errorsFieldsNames = Object.keys(errors.errors);
+        if (errorsFieldsNames.length > 0) {
+            return res.status(400).send(errors.errors[errorsFieldsNames[0]].message);
+        }
     }
-    );    
+    record.activityName = body.activityName;
+    record.description = body.description;
+    record.calories = body.calories;
+    record.date = body.date;
+    record.duration = body.duration;
+    await record.save();
+    return res.status(200).send('Record updated')
 });
   
-router.delete('/:recordId', async (req, res, next) => {
+// delete record
+router.delete('/:recordId', async (req, res) => {
     const foundedId = req.params._id;
     await RecordModel.findOneAndDelete({id:foundedId})
 

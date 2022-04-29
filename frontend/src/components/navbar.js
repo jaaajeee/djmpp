@@ -17,16 +17,17 @@ const Navbar = () => {
             
             <Nav className="justify-content-end">
             <Nav>
-                <Link to="/create" className='nav-link'>
+                <Link to="/" className='nav-link'>
               Addactivity
                 </Link>
             </Nav>
 
             <Nav>
-                <Link to="/record" className='nav-link'>
+                <Link to="/records" className='nav-link'>
               Activity List
                 </Link>
             </Nav>
+            
             </Nav>
             </Container>
             </Nav>

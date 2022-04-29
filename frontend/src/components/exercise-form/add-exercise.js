@@ -104,12 +104,16 @@ const AddActivities = () => {
                 value={activity.activityName}
                 required
                 >
+
                 <option >Select Activity</option>
                 <option >Running</option>
                 <option >Walking</option>
                 <option >Swimming</option>
                 <option >Cycling</option>
                 <option >Hiking</option>
+                <option >Gym</option>
+                <option >Yoga</option>
+                
                 </Form.Select>
                 <p>{errors.activity}</p>
         </Form.Group>

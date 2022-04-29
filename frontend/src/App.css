@@ -1,8 +1,17 @@
 .App {
   text-align: center;
-  background-color: rgb(255, 255, 255);
 }
 
-a {
-  color: rgb(41, 41, 41);
+body {
+  font-family: 'Francois One', sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Padauk', sans-serif;
+  margin: 0;
+  height: 100vh;
+  /* background: linear-gradient(rgba(0,0,0,0.5),#026d62),url(../public/bgcover.jpg); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
+
