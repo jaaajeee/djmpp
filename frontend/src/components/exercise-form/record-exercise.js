@@ -1,31 +1,14 @@
-
 import axios from "axios";
 import { useState, useEffect,useCallback } from "react";
 import Swal from 'sweetalert2'
 const RecordActivities = () => {
 
-    const [record, setRecord] = useState([useCallback(() => {
-        (async () => {
-            const client = axios.create({
-                baseURL: "http://localhost:8000",
-            });
-            const res = await client.get(`me/record`);
-            setRecord(res.data);
-        }
-        )();
-    }, [])]);
-
+    const [record, setRecord] = useState([]);
     const [update, setUpdate] = useState([]);
+
     const [isUpdating,setIsUpdating] = useState(false);
     
-    
-    const [data, setData] = useState({
-        activityName: "",
-        description: "",
-        calories: "",
-        date: "",
-        duration: "",
-    });
+
 
     const GetRecords = () => {
         (async () => {
@@ -38,19 +21,9 @@ const RecordActivities = () => {
         )();
     }
 
-    const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value,
-        });
-    }
-
     useEffect(() => {
         GetRecords();
-    }
-    , []);
-
-
+    }, []);
 
     // sweet alert modal for edit record and pull data from database
 
@@ -76,27 +49,27 @@ const RecordActivities = () => {
             <form>
             <div class="form-group">
             <label for="activityName">Activity Name</label>
-            <input type="text" class="form-control" id="activityName" placeholder="Activity Name" value="${update.activityName}">
+            <input type="text" class="form-control" id="activityName"  value="${update.activityName}">
             </div>
             
             <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" value="${update.description}">
+            <input type="text" class="form-control" id="description"  value="${update.description}">
             </div>
             
             <div class="form-group">
             <label for="calories">Calories</label>
-            <input type="number" class="form-control" id="calories" placeholder="Calories" value="${update.calories}">
+            <input type="number" class="form-control" id="calories"  value="${update.calories}">
             </div>
             
             <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" placeholder="Date" value="${update.date}">
+            <input type="date" class="form-control" id="date"  value="${update.date}">
             </div>
             
             <div class="form-group">
-            <label for="duration">Duration</label>
-            <input type="number" class="form-control" id="duration" placeholder="Duration" value="${update.duration}">
+            <label for="duration">Duration (minute)</label>
+            <input type="number" class="form-control" id="duration"  value="${update.duration}">
             </div>
             </form>
             `,
@@ -117,13 +90,13 @@ const RecordActivities = () => {
                         baseURL: "http://localhost:8000",
                     });
                     const res = await client.put(`me/record/${id}`, {
-                        activityName: document.getElementById('activityName').setUpdate,
-                        description: document.getElementById('description').setUpdate,
-                        calories: document.getElementById('calories').setUpdate,
-                        date: document.getElementById('date').setUpdate,
-                        duration: document.getElementById('duration').setUpdate,
+                        activityName: document.getElementById('activityName').setRecord,
+                        description: document.getElementById('description').setRecord,
+                        calories: document.getElementById('calories').setRecord,
+                        date: document.getElementById('date').setRecord,
+                        duration: document.getElementById('duration').update.duration,
                     });
-                    setRecord(res.data);
+                    setUpdate(res.data);
                 }
                 )();
             }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import "../style/form.css";
 
 const MySwal = withReactContent(Swal)
 
@@ -93,8 +94,8 @@ const AddActivities = () => {
 
 
     return (
-      <Form className="mt-3 col-md-4  container-fluid">
-        <Form.Group className="mb-3">
+      <Form className="mt-3 col-md-6 container-fluid">
+        <Form.Group className="">
             <Form.Label>Activity Name</Form.Label>
               <Form.Select
                 id="activityName"
@@ -118,7 +119,7 @@ const AddActivities = () => {
                 <p>{errors.activity}</p>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="">
             <Form.Label>Description</Form.Label>
             <Form.Control
                 id="description"
